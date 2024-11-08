@@ -10,6 +10,20 @@ A utility library for parsing and generating [Japanese Wiktionary](https://ja.wi
 
 In Japanese Wiktionary, there are unique notations and rules due to the characteristics of the Japanese language and the community's conventions. I thought that it was possible to automate some of them, so I created this library.
 
+## 使い方 / Usage
+
+### インストール
+
+```
+uv pip install git+https://github.com/mkpoli/wiktionary-ja.git
+```
+
+または
+
+```
+uv add git+https://github.com/mkpoli/wiktionary-ja.git
+```
+
 ## 開発 / Development
 
 詳細は[CONTRIBUTING.md](./CONTRIBUTING.md)を参照してください。
