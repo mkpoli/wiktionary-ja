@@ -9,3 +9,7 @@ A utility library for parsing and generating [Japanese Wiktionary](https://ja.wi
 日本語版ウィクショナリーには、日本語の特徴やコミュニティの慣習による、独自な表記法やルールがあります。それらのものをある程度自動化することが可能であると考えたため、このライブラリを作成しました。
 
 In Japanese Wiktionary, there are unique notations and rules due to the characteristics of the Japanese language and the community's conventions. I thought that it was possible to automate some of them, so I created this library.
+
+## ライセンス / License
+
+[MIT License](./LICENSE) &copy; 2024 mkpoli
