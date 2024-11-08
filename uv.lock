@@ -183,23 +183,26 @@ wheels = [
 [[package]]
 name = "wikitext"
 version = "0.1.0"
-source = { editable = "wikitext" }
+source = { editable = "packages/wikitext" }
 
 [[package]]
 name = "wiktionary"
 version = "0.1.0"
-source = { editable = "wiktionary" }
+source = { editable = "packages/wiktionary" }
 dependencies = [
     { name = "wikitext" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "wikitext", editable = "wikitext" }]
+requires-dist = [{ name = "wikitext", editable = "packages/wikitext" }]
 
 [[package]]
 name = "wiktionary-ja"
 version = "0.1.0"
 source = { virtual = "." }
+dependencies = [
+    { name = "wikitext" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -210,6 +213,7 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "wikitext", editable = "packages/wikitext" }]
 
 [package.metadata.requires-dev]
 dev = [

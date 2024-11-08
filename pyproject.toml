@@ -5,9 +5,15 @@ description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "mkpoli", email = "git@mkpo.li" }]
 requires-python = ">=3.13"
+dependencies = [
+    "wikitext",
+]
 
 [tool.uv.workspace]
-members = ["wikitext", "wiktionary"]
+members = ["packages/*"]
+
+[tool.uv.sources]
+wikitext = { workspace = true }
 
 [dependency-groups]
 dev = [
