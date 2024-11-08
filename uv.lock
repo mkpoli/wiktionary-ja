@@ -1,6 +1,12 @@
 version = 1
 requires-python = ">=3.13"
 
+[manifest]
+members = [
+    "wikitext",
+    "wiktionary-ja",
+]
+
 [[package]]
 name = "colorama"
 version = "0.4.6"
@@ -78,9 +84,17 @@ wheels = [
 ]
 
 [[package]]
+name = "wikitext"
+version = "0.1.0"
+source = { editable = "wikitext" }
+
+[[package]]
 name = "wiktionary-ja"
 version = "0.1.0"
 source = { editable = "." }
+dependencies = [
+    { name = "wikitext" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -89,6 +103,7 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "wikitext", editable = "wikitext" }]
 
 [package.metadata.requires-dev]
 dev = [
