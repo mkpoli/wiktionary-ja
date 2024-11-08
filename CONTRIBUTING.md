@@ -16,6 +16,9 @@ Even if you don't have time, you can still support the project in other ways, su
 - [Suggesting Enhancements](#suggesting-enhancements)
 - [Development](#development)
   - [Making Changes](#making-changes)
+- [Coverage](#coverage)
+  - [Test Coverage](#test-coverage)
+  - [Docstring Coverage](#docstring-coverage)
 
 ## Reporting Bugs
 
@@ -37,3 +40,12 @@ General steps to contribute to the project:
 ### Making Changes
 
 Commit messages need to follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. A good commit should be focused and logical changes that address one specific issue. Write commit messages that are clear and concise, detailed information can be added to the commit message body.
+
+## Coverage
+
+### Test Coverage
+
+To check the coverage of the project, run `uv run pytest --cov --cov-report xml`.
+
+### Docstring Coverage
+To check the coverage of the project, run `uv run docstr-coverage check`.

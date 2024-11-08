@@ -21,4 +21,9 @@ members = ["wikitext"]
 wikitext = { workspace = true }
 
 [dependency-groups]
-dev = ["pytest>=8.3.3", "ruff>=0.7.2"]
+dev = [
+    "docstr-coverage>=2.3.2",
+    "pytest-cov>=6.0.0",
+    "pytest>=8.3.3",
+    "ruff>=0.7.2",
+]

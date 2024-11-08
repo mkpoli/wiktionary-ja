@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python Test Debugger",
+      "type": "debugpy",
+      "request": "launch",
+      "justMyCode": false,
+      "console": "integratedTerminal",
+      "purpose": ["debug-test"],
+      "module": "pytest",
+      "args": ["${file}"]
+    }
+  ]
+}
