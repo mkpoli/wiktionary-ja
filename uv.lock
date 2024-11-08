@@ -4,6 +4,7 @@ requires-python = ">=3.13"
 [manifest]
 members = [
     "wikitext",
+    "wiktionary",
     "wiktionary-ja",
 ]
 
@@ -185,12 +186,20 @@ version = "0.1.0"
 source = { editable = "wikitext" }
 
 [[package]]
-name = "wiktionary-ja"
+name = "wiktionary"
 version = "0.1.0"
-source = { editable = "." }
+source = { editable = "wiktionary" }
 dependencies = [
     { name = "wikitext" },
 ]
+
+[package.metadata]
+requires-dist = [{ name = "wikitext", editable = "wikitext" }]
+
+[[package]]
+name = "wiktionary-ja"
+version = "0.1.0"
+source = { virtual = "." }
 
 [package.dev-dependencies]
 dev = [
@@ -201,7 +210,6 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "wikitext", editable = "wikitext" }]
 
 [package.metadata.requires-dev]
 dev = [
