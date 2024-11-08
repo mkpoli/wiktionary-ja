@@ -1,11 +1,9 @@
 [project]
 name = "wikitext"
 version = "0.1.0"
-description = "Add your description here"
+description = "Wikitext parser and generator for Python."
 readme = "README.md"
-authors = [
-    { name = "mkpoli", email = "git@mkpo.li" }
-]
+authors = [{ name = "mkpoli", email = "git@mkpo.li" }]
 requires-python = ">=3.13"
 dependencies = []
 

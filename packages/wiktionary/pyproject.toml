@@ -1,7 +1,7 @@
 [project]
 name = "wiktionary"
 version = "0.1.0"
-description = "Add your description here"
+description = "Wiktionary parser and generator for Python."
 readme = "README.md"
 authors = [{ name = "mkpoli", email = "git@mkpo.li" }]
 requires-python = ">=3.13"
