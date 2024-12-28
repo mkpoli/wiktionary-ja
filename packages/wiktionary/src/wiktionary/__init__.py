@@ -1,3 +1,4 @@
+import regex as re
 from typing import Optional
 from wikitext.citation import Citation
 from wikitext.richtext import Bold
@@ -18,9 +19,6 @@ class DefinitionList(OrderedList):
         return "\n".join(
             [f"#{item}" if item.startswith("*") else f"# {item}" for item in self]
         )
-
-
-import regex as re
 
 
 # ic.configureOutput(includeContext=True)
