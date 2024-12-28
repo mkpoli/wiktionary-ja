@@ -4,12 +4,8 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "mkpoli", email = "git@mkpo.li" }]
-requires-python = ">=3.13"
-dependencies = [
-    "jawikt",
-    "wikitext",
-    "wiktionary",
-]
+requires-python = ">=3.12"
+dependencies = ["jawikt", "wikitext", "wiktionary"]
 
 [tool.uv.workspace]
 members = ["packages/*"]

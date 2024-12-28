@@ -4,11 +4,8 @@ version = "0.1.0"
 description = "Wiktionary parser and generator for Python."
 readme = "README.md"
 authors = [{ name = "mkpoli", email = "git@mkpo.li" }]
-requires-python = ">=3.13"
-dependencies = [
-    "regex>=2024.11.6",
-    "wikitext",
-]
+requires-python = ">=3.12"
+dependencies = ["regex>=2024.11.6", "wikitext"]
 
 [build-system]
 requires = ["hatchling"]
