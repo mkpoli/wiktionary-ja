@@ -64,6 +64,11 @@ class Section:
     def __str__(self) -> str:
         return self.to_wikitext(Style())
 
+    def __repr__(self) -> str:
+        return (
+            f"Section(title={self.title}, level={self.level}, content={self.content})"
+        )
+
 
 class Document:
     style: Style
@@ -131,3 +136,6 @@ class Document:
             sections.append(section)
             sections.extend(section.subsections)
         return "\n".join([section.to_wikitext(self.style) for section in sections])
+
+    def __repr__(self) -> str:
+        return f"Document(sections={self.sections})"
