@@ -1,10 +1,36 @@
-# import MeCab
+import vibrato
+
 # import jaconv
+
+import logging
+
+from jawikt.furigana.tokenizer import Tokenizer
+
+logger = logging.getLogger(__name__)
+
+logger.setLevel(logging.DEBUG)
+
+
+class FuriganaAnnotator:
+    tokenizer: Tokenizer
+
+    def __init__(
+        self,
+        tokenizer: Tokenizer,
+    ):
+        # self.tokenizer = VibratoTokenizer(model_path)
+        self.tokenizer = tokenizer
+        print([a for a in dir(self.tokenizer) if not a.startswith("_")])
+
+    def annotate(self, text: str):
+        return self.tokenizer.tokenize(text)
+
+    # def get_hiragana(text: str) -> str:
+    #     return jaconv.kata2hira(text)
+
+
 # from Language.linguistics.japanese.ruby import extract_ruby_pairs
 # from Language.linguistics.japanese.mecab.unidic import parse
-
-# # tagger = MeCab.Tagger("-d F:\\Dictionary\\ipadic")
-# tagger = MeCab.Tagger("-d /usr/local/lib/mecab/dic/ipadic")
 
 
 # def get_hiragana(text: str) -> str:

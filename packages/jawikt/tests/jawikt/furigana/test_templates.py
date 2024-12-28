@@ -1,4 +1,4 @@
-from jawikt.furigana import ふりがな, おくりがな2, おくりがな3
+from jawikt.furigana.templates import ふりがな, おくりがな2, おくりがな3
 
 
 def test_furigana():
