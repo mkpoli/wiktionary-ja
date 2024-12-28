@@ -69,7 +69,18 @@ class Section:
         # Only add empty line if both style requires it and there is content
         empty_line = "\n" if style.empty_line_after_headings and self.content else ""
 
-        return f"{heading}\n{empty_line}{self.content}\n"
+        parts = []
+        parts.append(f"{heading}\n{empty_line}{self.content}")
+
+        if self.subsections:
+            subsections_text = "\n\n".join(
+                subsection.to_wikitext(style).rstrip()
+                for subsection in self.subsections
+            )
+            parts.append(subsections_text)
+
+        result = "\n\n".join(parts)
+        return result + "\n"  # Ensure there's always a trailing newline
 
     def add_subsection(self, section: "Section") -> None:
         self.subsections.append(section)
@@ -160,18 +171,20 @@ class Document:
         if self.content:
             parts.append(self.content)
 
-        sections = []
+        # Only include top-level sections, their subsections are handled by to_wikitext
+        section_texts = []
         for section in self.sections:
-            sections.append(section)
-            sections.extend(section.subsections)
-
-        # Filter out empty strings and join with single newline
-        section_texts = [section.to_wikitext(self.style) for section in sections]
-        section_texts = [text.rstrip() for text in section_texts if text.strip()]
-        parts.extend(section_texts)
+            text = section.to_wikitext(self.style)
+            if text.strip():
+                section_texts.append(
+                    text.rstrip()
+                )  # Remove trailing newlines before joining
 
         # Join with double newlines and ensure there's a final newline
-        return "\n\n".join(parts) + "\n"
+        if section_texts:
+            parts.extend(section_texts)
+            return "\n\n".join(parts) + "\n"
+        return "\n".join(parts) + "\n"
 
     def __repr__(self) -> str:
         return f"Document(content={self.content!r}, sections={self.sections})"

@@ -78,8 +78,6 @@ class TestDocument:
         expected_output = (
             sections["main"].to_wikitext(style)
             + "\n"
-            + sections["sub"].to_wikitext(style)
-            + "\n"
             + sections["another"].to_wikitext(style)
         )
         assert str(document) == expected_output
