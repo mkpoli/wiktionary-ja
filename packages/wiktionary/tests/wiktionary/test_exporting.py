@@ -86,7 +86,7 @@ class TestDocument:
 
     def test_document_with_no_sections(self):
         empty_doc = Document()
-        assert str(empty_doc) == ""
+        assert str(empty_doc) == "\n"
 
 
 class TestStyle:

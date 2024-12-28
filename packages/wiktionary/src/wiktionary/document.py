@@ -72,10 +72,12 @@ class Section:
 
 class Document:
     style: Style
+    content: str
     sections: list[Section]
 
-    def __init__(self, sections=None, style=None):
+    def __init__(self, content=None, sections=None, style=None):
         self.style = Style() if style is None else style
+        self.content = content or ""
         self.sections = [] if sections is None else sections
 
     @classmethod
@@ -94,10 +96,20 @@ class Document:
 
         # Split text into sections based on headings
         sections = []
+        content = ""
         current_section_text = ""
 
         # Skip initial empty lines
         lines = [line for line in text.split("\n") if line.strip()]
+
+        # Collect content before first heading
+        for i, line in enumerate(lines):
+            if line.strip().startswith("="):
+                break
+            content += line + "\n"
+
+        # Remove content lines from lines list
+        lines = lines[len(content.splitlines()) :]
 
         for line in lines:
             if line.strip().startswith("="):
@@ -125,17 +137,28 @@ class Document:
 
             section_stack.append(section)
 
-        return cls(sections=root_sections, style=style)
+        return cls(content=content.strip(), sections=root_sections, style=style)
 
     def add_section(self, section: Section) -> None:
         self.sections.append(section)
 
     def __str__(self):
+        parts = []
+        if self.content:
+            parts.append(self.content)
+
         sections = []
         for section in self.sections:
             sections.append(section)
             sections.extend(section.subsections)
-        return "\n".join([section.to_wikitext(self.style) for section in sections])
+
+        # Filter out empty strings and join with single newline
+        section_texts = [section.to_wikitext(self.style) for section in sections]
+        section_texts = [text.rstrip() for text in section_texts if text.strip()]
+        parts.extend(section_texts)
+
+        # Join with double newlines and ensure there's a final newline
+        return "\n\n".join(parts) + "\n"
 
     def __repr__(self) -> str:
-        return f"Document(sections={self.sections})"
+        return f"Document(content={self.content!r}, sections={self.sections})"

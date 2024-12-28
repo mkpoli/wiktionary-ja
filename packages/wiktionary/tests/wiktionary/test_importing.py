@@ -108,3 +108,17 @@ def test_section_to_string():
     section = Section("Test", 2, "Content")
     expected = "== Test ==\n\nContent\n"  # Note the extra newline
     assert str(section) == expected
+
+
+def test_document_with_preamble():
+    text = """
+Hi, I'm a preamble!
+= Main =
+== Sub 1 ==
+== Sub 2 ==
+= Other =
+"""
+    doc = Document.from_wikitext(text)
+    assert len(doc.sections) == 2
+    assert doc.sections[0].title == "Main"
+    assert len(doc.sections[0].subsections) == 2
