@@ -1,5 +1,9 @@
 import pytest
 from wiktionary.document import Document, Section, Style
+from wiktionary.style import (
+    STYLE_WIKTIONARY_ENGLISH,
+    STYLE_PRESETS,
+)
 
 
 @pytest.fixture
@@ -83,3 +87,64 @@ class TestDocument:
     def test_document_with_no_sections(self):
         empty_doc = Document()
         assert str(empty_doc) == ""
+
+
+class TestStyle:
+    def test_style_default_values(self):
+        style = Style()
+        assert style.space_in_headings is True
+        assert style.empty_line_after_headings is True
+
+    def test_style_custom_values(self):
+        style = Style(space_in_headings=False, empty_line_after_headings=False)
+        assert style.space_in_headings is False
+        assert style.empty_line_after_headings is False
+
+    def test_wiktionary_english_preset(self):
+        assert STYLE_WIKTIONARY_ENGLISH.space_in_headings is False
+        assert STYLE_WIKTIONARY_ENGLISH.empty_line_after_headings is False
+
+    def test_style_presets_contain_wten(self):
+        assert "wten" in STYLE_PRESETS
+        assert STYLE_PRESETS["wten"] is STYLE_WIKTIONARY_ENGLISH
+
+    @pytest.mark.parametrize(
+        "style,heading,expected",
+        [
+            (
+                Style(space_in_headings=True, empty_line_after_headings=True),
+                Section("Test", 2, "Content"),
+                "== Test ==\n\nContent\n",
+            ),
+            (
+                Style(space_in_headings=False, empty_line_after_headings=True),
+                Section("Test", 2, "Content"),
+                "==Test==\n\nContent\n",
+            ),
+            (
+                Style(space_in_headings=True, empty_line_after_headings=False),
+                Section("Test", 2, "Content"),
+                "== Test ==\nContent\n",
+            ),
+            (
+                Style(space_in_headings=False, empty_line_after_headings=False),
+                Section("Test", 2, "Content"),
+                "==Test==\nContent\n",
+            ),
+        ],
+    )
+    def test_style_formatting(self, style, heading, expected):
+        assert heading.to_wikitext(style) == expected
+
+    def test_style_equality(self):
+        style1 = Style(space_in_headings=True, empty_line_after_headings=True)
+        style2 = Style(space_in_headings=True, empty_line_after_headings=True)
+        style3 = Style(space_in_headings=False, empty_line_after_headings=True)
+
+        assert style1 == style2
+        assert style1 != style3
+
+    def test_wiktionary_english_formatting(self):
+        section = Section("Test", 2, "Content")
+        expected = "==Test==\nContent\n"
+        assert section.to_wikitext(STYLE_WIKTIONARY_ENGLISH) == expected
