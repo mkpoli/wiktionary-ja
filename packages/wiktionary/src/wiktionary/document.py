@@ -41,11 +41,24 @@ class Section:
                 break
             level += 1
 
-        # Extract title (strip equal signs and spaces)
-        title = heading.strip("= ")
+        # Extract title, handling HTML comments
+        title_line = heading.strip("= ")
+        comment = ""
+        if "<!--" in title_line:
+            parts = title_line.split("<!--", 1)
+            title = parts[0].strip()  # Get everything before the comment
+            comment = "<!--" + parts[1]
+        else:
+            title = title_line
 
-        # Everything after heading is content
-        content = "\n".join(lines[1:]).strip()
+        # Remove any trailing equals signs from the title
+        title = title.rstrip("= ")
+
+        # Everything after heading is content, prepending any comment from the heading
+        content_lines = lines[1:]
+        if comment:
+            content_lines.insert(0, comment)
+        content = "\n".join(content_lines).strip()
 
         return cls(title=title, level=level, content=content)
 

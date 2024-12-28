@@ -122,3 +122,13 @@ Hi, I'm a preamble!
     assert len(doc.sections) == 2
     assert doc.sections[0].title == "Main"
     assert len(doc.sections[0].subsections) == 2
+
+
+def test_document_with_distracting_comment_on_heading_line():
+    text = """
+= Main = <!-- This is a comment -->
+"""
+    doc = Document.from_wikitext(text)
+    assert len(doc.sections) == 1
+    assert doc.sections[0].title == "Main"
+    assert len(doc.sections[0].subsections) == 0
